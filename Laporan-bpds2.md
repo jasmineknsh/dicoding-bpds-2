@@ -120,7 +120,7 @@ Untuk melihat *Student Performence Dashboard* secara lokal, ikuti langkah-langka
        * **Username:** `root@mail.com`
        * **Password:** `root123`
        
-       *Dashboard* *attrition* dapat langsung diakses setelah *login*
+       *Dashboard* *Student Performance* dapat langsung diakses setelah *login*
 
 ## Business Dashboard
 
@@ -288,3 +288,5 @@ Melakukan evaluasi komprehensif terhadap program studi dengan tingkat atrisi tin
 **4. Penguatan Skema Dukungan Finansial dan Non-Akademik**
 
 Memperkuat sistem dukungan untuk mahasiswa dengan tunggakan biaya studi dan kelompok demografis berisiko tinggi. Program mencakup bantuan finansial proaktif melalui skema pembayaran fleksibel, serta program orientasi dan mentoring khusus untuk mendukung adaptasi mahasiswa non-tradisional.
+
+Dengan implementasi rekomendasi ini, Jaya Jaya Institut diharapkan dapat secara signifikan mengurangi angka dropout dan meningkatkan tingkat keberhasilan studi mahasiswanya.
