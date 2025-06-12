@@ -1,0 +1,33 @@
+# Folder yang tidak perlu di-track
+data/
+img/
+
+# File video atau media besar
+*.mkv
+*.mp4
+
+# File database
+*.db
+*.db.mv.db
+
+# File notebook hasil eksekusi
+*.ipynb_checkpoints/
+
+# File konfigurasi atau sistem lokal
+.env
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# File log / sementara
+*.log
+*.tmp
+
+# Virtual environment (jika ada)
+venv/
+.env/
