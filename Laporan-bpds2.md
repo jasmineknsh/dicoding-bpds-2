@@ -33,8 +33,6 @@ Proyek ini bertujuan untuk mendukung Jaya Jaya Institut dalam mengurangi tingkat
 * **Membangun model prediktif berbasis machine learning** untuk mendeteksi mahasiswa berisiko dropout secara dini.
 * **Menyediakan dashboard interaktif berbasis data** yang dapat digunakan pihak manajemen akademik untuk memantau, menganalisis, dan merancang strategi intervensi secara proaktif dan tepat sasaran.
 
-
-
 ## **Cakupan Proyek**
 
 1. **Pengumpulan dan Pengolahan Data Siswa:**
@@ -60,10 +58,12 @@ Proyek ini bertujuan untuk mendukung Jaya Jaya Institut dalam mengurangi tingkat
 
 
 ### Persiapan
+---
 
 Sumber data: [Dataset Students Performance](https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv).
 
 Setup environment:
+
 **1. Jalankan `notebook.ipynb`:**
 
 Instal Dependensi: Di terminal proyek, jalankan perintah berikut.
@@ -72,13 +72,14 @@ pip install -r requirements.txt
 ```
 
 **2. Jalankan Streamlit App (app.py):**
-Pastikan Model Tersedia: Pastikan file model (rf_model.pkl) dan encoder (onehot_encoder.pkl) berada di dalam folder model/ di direktori proyek Anda.
+
+Pastikan Model Tersedia: Pastikan file model (rf_model2.pkl) dan encoder (onehot_encoder2.pkl) berada di dalam folder model/ di direktori proyek Anda.
 Instal Streamlit (jika belum):
 ```
 pip install streamlit
 ```
 
-Jalankan Aplikasi: Di terminal proyek, jalankan:
+Jalankan Aplikasi di terminal proyek, jalankan:
 ```
 streamlit run app.py
 ```
@@ -130,13 +131,13 @@ Untuk melihat *Student Performence Dashboard* secara lokal, ikuti langkah-langka
 *Business Dashboard* ini dikembangkan menggunakan Metabase dan berfungsi sebagai alat visualisasi interaktif untuk memantau performa mahasiswa dan menganalisis faktor-faktor yang berkontribusi terhadap *dropout*. Dashboard ini menyediakan gambaran komprehensif mengenai status mahasiswa dan metrik kunci yang relevan, memungkinkan pengambilan keputusan berbasis data untuk meningkatkan retensi mahasiswa.
 
 #### **Ringkasan Statistik Utama**
-Bagian utama dashboard menampilkan Key Performance Indicators (KPI) yang memberikan gambaran cepat mengenai kondisi populasi mahasiswa saat ini.
+Bagian utama dashboard menampilkan *Key Performance Indicators* (KPI) yang memberikan gambaran cepat mengenai kondisi populasi mahasiswa saat ini.
 * **Total Mahasiswa:** Menampilkan jumlah keseluruhan mahasiswa yang terdata, yaitu **4,424**.
 * **Total Mahasiswa yang Telah Lulus:** Jumlah mahasiswa yang sudah menyelesaikan studi, yaitu **2,209**.
 * **Total Mahasiswa yang Telah Keluar:** Jumlah mahasiswa yang *dropout* atau keluar dari institusi, yaitu **1,421**.
 * **Total Mahasiswa yang Terdaftar:** Jumlah mahasiswa yang saat ini masih aktif terdaftar, yaitu **794**.
-* **Total Mahasiswa yang Berpotensi Keluar:** Jumlah mahasiswa aktif yang diidentifikasi berisiko tinggi *dropout* oleh model prediksi, yaitu **117**.
-* **Total Mahasiswa yang Berpotensi Tinggi Keluar:** Subset dari mahasiswa berisiko dengan tingkat kepercayaan (*probability*) di atas 65%, yaitu **28** orang yang memerlukan perhatian paling mendesak.
+* **Total Mahasiswa yang Berpotensi Keluar:** Jumlah mahasiswa aktif yang diidentifikasi berisiko tinggi *dropout* oleh model prediksi, yaitu **147**.
+* **Total Mahasiswa yang Berpotensi Tinggi Keluar:** Subset dari mahasiswa berisiko dengan tingkat kepercayaan (*probability*) di atas 65%, yaitu **93** orang yang memerlukan perhatian paling mendesak.
 
 #### **10 Fitur Penting Teratas Penyebab Mahasiswa Keluar**
 Diagram batang ini menampilkan fitur-fitur (variabel) dengan tingkat kepentingan (*importance*) tertinggi yang memengaruhi keputusan mahasiswa untuk *dropout*, berdasarkan analisis model Random Forest. 10 fitur paling penting tersebut adalah:
@@ -166,14 +167,63 @@ Selain poin-poin di atas, dashboard juga menyajikan wawasan mendalam lainnya:
 * **Performa Akademik vs. Status:** Terdapat jurang pemisah yang sangat jelas antara performa akademik mahasiswa yang `Lulus` dan yang `Dropout`. Mahasiswa yang lulus secara konsisten memiliki rata-rata nilai dan jumlah SKS lulus yang jauh lebih tinggi di setiap semester.
 * **Distribusi Risiko:** Melalui grafik distribusi, teridentifikasi bahwa kelompok demografis tertentu memiliki tingkat risiko *dropout* yang lebih tinggi, seperti **mahasiswa laki-laki** dan mahasiswa yang masuk melalui **jalur pendaftaran non-tradisional** (contoh: usia di atas 23 tahun). Informasi ini krusial untuk merancang program intervensi yang lebih spesifik dan tertarget.
 
-#### **EDA di Dashboard**
+### **Analisis Visualisasi Distribusi Mahasiswa pada Dashboard**
+
+#### 1. **Distribusi Status Mahasiswa Berdasarkan Beasiswa**
+
+Grafik ini menunjukkan hubungan antara status mahasiswa (Dropout, Enrolled, Graduate) dan status penerima beasiswa:
+
+* Mahasiswa **bukan penerima beasiswa** mendominasi kategori **dropout**.
+* Sebaliknya, **penerima beasiswa** lebih banyak yang **berhasil lulus (graduate)**.
+* Hal ini mengindikasikan bahwa **beasiswa berpotensi menjadi faktor pelindung terhadap risiko dropout**.
 
 
 
-Kesimpulan dari Dashboard:
-Dashboard ini secara jelas menunjukkan bahwa kinerja akademik, khususnya jumlah SKS yang diselesaikan dan nilai yang diperoleh pada dua semester pertama, adalah faktor prediktor paling dominan dan andal untuk mengidentifikasi risiko dropout. Mahasiswa yang gagal memenuhi standar akademik minimal di awal masa studi hampir dapat dipastikan memiliki probabilitas dropout yang sangat tinggi.
+#### 2. **Distribusi Gender dan Status Mahasiswa**
 
-Selain itu, kesimpulan penting lainnya adalah bahwa risiko dropout tidak disebabkan oleh satu faktor tunggal, melainkan interaksi kompleks antara beberapa variabel. Dashboard ini secara efektif memvisualisasikan bagaimana kombinasi dari faktor sekunder—seperti kondisi finansial (status pembayaran UKT dan utang), latar belakang demografis (usia dan gender), serta pilihan program studi (terutama kelas malam)—menciptakan profil-profil mahasiswa yang sangat rentan. Dengan demikian, dashboard ini menjadi alat yang sangat kuat untuk memandu institusi dalam merancang strategi intervensi yang tidak hanya reaktif, tetapi juga proaktif dan tertarget pada segmen mahasiswa yang paling membutuhkan.
+Visualisasi ini membandingkan status mahasiswa dengan jenis kelamin:
+
+* **Laki-laki (0)** memiliki jumlah **dropout dan graduate** yang tinggi.
+* **Perempuan (1)** menunjukkan distribusi lebih seimbang antara enrolled, dropout, dan graduate.
+* Terlihat bahwa **laki-laki lebih rentan mengalami dropout**, meskipun juga banyak yang lulus.
+
+
+
+#### 3. **Distribusi Nilai Rata-rata Mahasiswa**
+
+Grafik ini memperlihatkan rata-rata SKS lulus dan nilai akhir pada semester 1 dan 2:
+
+* Mahasiswa **dropout** memiliki **rata-rata nilai dan SKS terendah** di semua semester.
+* Mahasiswa yang **lulus** menunjukkan rata-rata nilai dan SKS yang **konsisten tinggi**.
+* Temuan ini menunjukkan bahwa **prestasi akademik sangat berpengaruh terhadap kelulusan** dan risiko dropout.
+
+
+
+#### 4. **Distribusi Umur dan Status Mahasiswa**
+
+Distribusi status mahasiswa dikelompokkan berdasarkan rentang umur:
+
+* Mahasiswa usia **17–20 tahun** mendominasi kategori **graduate** dan **enrolled**, menandakan mereka memiliki kecenderungan untuk menyelesaikan studi.
+* Mahasiswa dengan usia **di atas 25 tahun** cenderung memiliki **angka dropout yang tinggi**.
+* Faktor usia dapat mempengaruhi kelulusan, mungkin karena faktor tanggung jawab pekerjaan atau keluarga.
+
+####  **Kesimpulan Akhir Dashboard Deteksi Dropout Mahasiswa**
+
+Dashboard ini memberikan gambaran menyeluruh mengenai faktor-faktor yang berkontribusi terhadap risiko **dropout (DO)** mahasiswa berdasarkan data historis. Visualisasi interaktif pada dashboard secara konsisten menunjukkan bahwa **kinerja akademik awal**—terutama jumlah SKS yang diselesaikan dan nilai pada semester 1 dan 2—merupakan **indikator paling kuat** dalam memprediksi risiko dropout.
+
+Mahasiswa dengan **rata-rata SKS dan nilai rendah** sejak awal masa studi hampir seluruhnya berujung pada status dropout. Hal ini menjadi sinyal penting bahwa intervensi perlu difokuskan sejak semester awal perkuliahan.
+
+Namun, dashboard juga menunjukkan bahwa risiko DO tidak hanya disebabkan oleh performa akademik semata. Terdapat sejumlah **faktor sekunder** yang memperkuat risiko ini, di antaranya:
+
+* **Status Beasiswa:** Mahasiswa **bukan penerima beasiswa** memiliki tingkat dropout yang lebih tinggi dibandingkan yang menerima beasiswa.
+* **Gender dan Usia:** Laki-laki dan mahasiswa **berusia di bawah 25 tahun** cenderung memiliki angka DO yang lebih tinggi.
+* **Pilihan Program Studi:** Program studi menunjukkan risiko dropout lebih besar, kemungkinan karena beririsan dengan mahasiswa pekerja atau tanggungan lainnya.
+* **Faktor Keuangan:** Meski tidak dominan, **status utang atau tunggakan pembayaran** juga tercatat sebagai penambah risiko.
+
+Sebagai tambahan, dashboard mencatat bahwa:
+
+* Sebanyak **147 mahasiswa terdeteksi berpotensi DO** oleh sistem.
+* Dari jumlah tersebut, **93 mahasiswa memiliki probabilitas dropout lebih dari 60%**, sehingga perlu menjadi prioritas dalam program pembinaan atau intervensi.
 
 
 ## Menjalankan Sistem Machine Learning
@@ -181,7 +231,8 @@ Prototype sistem machine learning ini bertujuan untuk memprediksi status mahasis
 
 Langkah-langkah Menjalankan Prototype:
 
-1. Buka aplikasi prototype melalu [link berikut](https://duckduckgo.com).
+1. Buka aplikasi prototype melalu [link berikut](https://predictjayamaju.streamlit.app/).
+
 2. Isi seluruh field input sesuai data yang diinginkan, yang terbagi dalam beberapa bagian seperti yang terlihat pada screenshot Anda:
 3. Klik tombol “Prediksi”.
 
@@ -193,8 +244,6 @@ Sistem akan menjalankan model machine learning yang telah dilatih sebelumnya. Ha
 ```
 ✅ Mahasiswa kemungkinan Bertahan / Lulus. Probabilitas: 78%
 ```
-
-
 
 ### Conclusion
 ---
@@ -220,8 +269,7 @@ Hasil ini menunjukkan bahwa model memiliki kemampuan yang sangat baik dalam meng
 
 
 
-### Rekomendasi Action Items
----
+## Rekomendasi Action Items
 
 Berdasarkan hasil analisis dan model prediksi yang telah dikembangkan, berikut adalah rekomendasi tindakan strategis yang dapat diimplementasikan oleh institusi guna menekan angka putus studi (dropout) dan meningkatkan tingkat retensi mahasiswa.
 
