@@ -1,6 +1,5 @@
 # Folder yang tidak perlu di-track
 data/
-img/
 
 # File video atau media besar
 *.mkv

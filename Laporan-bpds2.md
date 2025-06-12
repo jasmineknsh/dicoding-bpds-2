@@ -162,11 +162,6 @@ Diagram donat ini menunjukkan proporsi mahasiswa berdasarkan status mereka saat 
 
 Visualisasi ini secara efektif menyoroti besarnya proporsi mahasiswa yang telah *dropout*, yang menegaskan urgensi dari proyek ini.
 
-#### **Analisis Tambahan dari Dashboard**
-Selain poin-poin di atas, dashboard juga menyajikan wawasan mendalam lainnya:
-* **Performa Akademik vs. Status:** Terdapat jurang pemisah yang sangat jelas antara performa akademik mahasiswa yang `Lulus` dan yang `Dropout`. Mahasiswa yang lulus secara konsisten memiliki rata-rata nilai dan jumlah SKS lulus yang jauh lebih tinggi di setiap semester.
-* **Distribusi Risiko:** Melalui grafik distribusi, teridentifikasi bahwa kelompok demografis tertentu memiliki tingkat risiko *dropout* yang lebih tinggi, seperti **mahasiswa laki-laki** dan mahasiswa yang masuk melalui **jalur pendaftaran non-tradisional** (contoh: usia di atas 23 tahun). Informasi ini krusial untuk merancang program intervensi yang lebih spesifik dan tertarget.
-
 ### **Analisis Visualisasi Distribusi Mahasiswa pada Dashboard**
 
 #### 1. **Distribusi Status Mahasiswa Berdasarkan Beasiswa**
@@ -204,7 +199,7 @@ Grafik ini memperlihatkan rata-rata SKS lulus dan nilai akhir pada semester 1 da
 Distribusi status mahasiswa dikelompokkan berdasarkan rentang umur:
 
 * Mahasiswa usia **17–20 tahun** mendominasi kategori **graduate** dan **enrolled**, menandakan mereka memiliki kecenderungan untuk menyelesaikan studi.
-* Mahasiswa dengan usia **di atas 25 tahun** cenderung memiliki **angka dropout yang tinggi**.
+* Mahasiswa dengan usia **di bawah 25 tahun** cenderung memiliki **angka dropout yang tinggi**.
 * Faktor usia dapat mempengaruhi kelulusan, mungkin karena faktor tanggung jawab pekerjaan atau keluarga.
 
 ####  **Kesimpulan Akhir Dashboard Deteksi Dropout Mahasiswa**
@@ -229,11 +224,15 @@ Sebagai tambahan, dashboard mencatat bahwa:
 ## Menjalankan Sistem Machine Learning
 Prototype sistem machine learning ini bertujuan untuk memprediksi status mahasiswa di Jaya Jaya Institut, apakah mereka akan dropout atau tidak, berdasarkan data individual mahasiswa.
 
+![streamlit1](img/streamlit1.png)
+![streamlit2](img/streamlit2.png)
+
 Langkah-langkah Menjalankan Prototype:
 
 1. Buka aplikasi prototype melalu [link berikut](https://predictjayamaju.streamlit.app/).
 
-2. Isi seluruh field input sesuai data yang diinginkan, yang terbagi dalam beberapa bagian seperti yang terlihat pada screenshot Anda:
+2. Isi seluruh field input pada form yang tersedia di tampilan Streamlit, yang terbagi dalam beberapa bagian 
+
 3. Klik tombol “Prediksi”.
 
 Sistem akan menjalankan model machine learning yang telah dilatih sebelumnya. Hasil prediksi akan muncul di bagian bawah antarmuka, misalnya:
