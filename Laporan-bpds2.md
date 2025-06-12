@@ -71,27 +71,23 @@ Instal Dependensi: Di terminal proyek, jalankan perintah berikut.
 pip install -r requirements.txt
 ```
 
-**2. Jalankan predict.py:**
-Verifikasi Direktori Model: Pastikan path model dan encoder di prediction.py sudah benar. Ubah jika perlu, model akan diambil dari folder model/:
+**2. Jalankan Streamlit App (app.py):**
+Pastikan Model Tersedia: Pastikan file model (rf_model.pkl) dan encoder (onehot_encoder.pkl) berada di dalam folder model/ di direktori proyek Anda.
+Instal Streamlit (jika belum):
 ```
-model = joblib.load("model/rf_model.pkl")
-encoder = joblib.load("model/onehot_encoder.pkl")
-```
-
-Instal Dependensi (jika belum):
-```
-pip install pandas joblib scikit-learn
+pip install streamlit
 ```
 
-Jalankan Skrip: Di terminal proyek, jalankan
+Jalankan Aplikasi: Di terminal proyek, jalankan:
 ```
-python run predict.py
+streamlit run app.py
 ```
-Hasil prediksi akan ditampilkan sebagai output.
+
+Aplikasi Streamlit akan terbuka di browser anda.
 
 **3. Menjalankan Dashboard di Metabase Lokal**
 
-Untuk melihat *dashboard attrition* karyawan Jaya Jaya Maju secara lokal, ikuti langkah-langkah berikut menggunakan Docker:
+Untuk melihat *Student Performence Dashboard* secara lokal, ikuti langkah-langkah berikut menggunakan Docker:
 
    1.  **Instal Docker** di perangkat Anda jika belum terinstal.
    2.  **Tarik *image* Metabase:**
@@ -126,25 +122,82 @@ Untuk melihat *dashboard attrition* karyawan Jaya Jaya Maju secara lokal, ikuti 
        *Dashboard* *attrition* dapat langsung diakses setelah *login*
 
 ## Business Dashboard
-Jelaskan tentang business dashboard yang telah dibuat. Jika ada, sertakan juga link untuk mengakses dashboard tersebut.
-![dashboard1](img/jasmine_kinasih-dashboard1.png.png)
-![dashboard2](img/jasmine_kinasih-dashboard2.png.png)
-![dashboard3](img/jasmine_kinasih-dashboard3.png.png)
 
+![dashboard1](img/jasmine_kinasih-dashboard1.png)
+![dashboard2](img/jasmine_kinasih-dashboard2.png)
+![dashboard3](img/jasmine_kinasih-dashboard3.png)
+
+*Business Dashboard* ini dikembangkan menggunakan Metabase dan berfungsi sebagai alat visualisasi interaktif untuk memantau performa mahasiswa dan menganalisis faktor-faktor yang berkontribusi terhadap *dropout*. Dashboard ini menyediakan gambaran komprehensif mengenai status mahasiswa dan metrik kunci yang relevan, memungkinkan pengambilan keputusan berbasis data untuk meningkatkan retensi mahasiswa.
+
+#### **Ringkasan Statistik Utama**
+Bagian utama dashboard menampilkan Key Performance Indicators (KPI) yang memberikan gambaran cepat mengenai kondisi populasi mahasiswa saat ini.
+* **Total Mahasiswa:** Menampilkan jumlah keseluruhan mahasiswa yang terdata, yaitu **4,424**.
+* **Total Mahasiswa yang Telah Lulus:** Jumlah mahasiswa yang sudah menyelesaikan studi, yaitu **2,209**.
+* **Total Mahasiswa yang Telah Keluar:** Jumlah mahasiswa yang *dropout* atau keluar dari institusi, yaitu **1,421**.
+* **Total Mahasiswa yang Terdaftar:** Jumlah mahasiswa yang saat ini masih aktif terdaftar, yaitu **794**.
+* **Total Mahasiswa yang Berpotensi Keluar:** Jumlah mahasiswa aktif yang diidentifikasi berisiko tinggi *dropout* oleh model prediksi, yaitu **117**.
+* **Total Mahasiswa yang Berpotensi Tinggi Keluar:** Subset dari mahasiswa berisiko dengan tingkat kepercayaan (*probability*) di atas 65%, yaitu **28** orang yang memerlukan perhatian paling mendesak.
+
+#### **10 Fitur Penting Teratas Penyebab Mahasiswa Keluar**
+Diagram batang ini menampilkan fitur-fitur (variabel) dengan tingkat kepentingan (*importance*) tertinggi yang memengaruhi keputusan mahasiswa untuk *dropout*, berdasarkan analisis model Random Forest. 10 fitur paling penting tersebut adalah:
+* `Curricular_units_2nd_sem_approved` (Jumlah SKS lulus di semester 2)
+* `Curricular_units_2nd_sem_grade` (Nilai rata-rata di semester 2)
+* `Curricular_units_1st_sem_grade` (Nilai rata-rata di semester 1)
+* `Curricular_units_1st_sem_approved` (Jumlah SKS lulus di semester 1)
+* `Age_at_enrollment` (Usia saat mendaftar)
+* `Tuition_fees_up_to_date` (Status pembayaran UKT)
+* `Scholarship_holder` (Penerima beasiswa)
+* `Debtor` (Memiliki tunggakan)
+* `Gender_Male` (Berjenis kelamin Laki-laki)
+* `Application_mode_2nd Phase - General Contingent` (Jalur pendaftaran fase 2)
+
+Fitur-fitur ini menjadi fokus utama dalam memahami dan mengatasi masalah *dropout*. Terlihat jelas bahwa **performa akademik di semester awal** adalah faktor yang paling dominan.
+
+#### **Distribusi Persentase Mahasiswa berdasarkan Status**
+Diagram donat ini menunjukkan proporsi mahasiswa berdasarkan status mereka saat ini, dengan total mahasiswa ditampilkan di tengah diagram untuk memberikan konteks.
+* **Graduate (Lulus):** **50%**
+* **Dropout (Keluar):** **32%**
+* **Enrolled (Terdaftar):** **18%**
+
+Visualisasi ini secara efektif menyoroti besarnya proporsi mahasiswa yang telah *dropout*, yang menegaskan urgensi dari proyek ini.
+
+#### **Analisis Tambahan dari Dashboard**
+Selain poin-poin di atas, dashboard juga menyajikan wawasan mendalam lainnya:
+* **Performa Akademik vs. Status:** Terdapat jurang pemisah yang sangat jelas antara performa akademik mahasiswa yang `Lulus` dan yang `Dropout`. Mahasiswa yang lulus secara konsisten memiliki rata-rata nilai dan jumlah SKS lulus yang jauh lebih tinggi di setiap semester.
+* **Distribusi Risiko:** Melalui grafik distribusi, teridentifikasi bahwa kelompok demografis tertentu memiliki tingkat risiko *dropout* yang lebih tinggi, seperti **mahasiswa laki-laki** dan mahasiswa yang masuk melalui **jalur pendaftaran non-tradisional** (contoh: usia di atas 23 tahun). Informasi ini krusial untuk merancang program intervensi yang lebih spesifik dan tertarget.
+
+#### **EDA di Dashboard**
+
+
+
+Kesimpulan dari Dashboard:
+Dashboard ini secara jelas menunjukkan bahwa kinerja akademik, khususnya jumlah SKS yang diselesaikan dan nilai yang diperoleh pada dua semester pertama, adalah faktor prediktor paling dominan dan andal untuk mengidentifikasi risiko dropout. Mahasiswa yang gagal memenuhi standar akademik minimal di awal masa studi hampir dapat dipastikan memiliki probabilitas dropout yang sangat tinggi.
+
+Selain itu, kesimpulan penting lainnya adalah bahwa risiko dropout tidak disebabkan oleh satu faktor tunggal, melainkan interaksi kompleks antara beberapa variabel. Dashboard ini secara efektif memvisualisasikan bagaimana kombinasi dari faktor sekunder—seperti kondisi finansial (status pembayaran UKT dan utang), latar belakang demografis (usia dan gender), serta pilihan program studi (terutama kelas malam)—menciptakan profil-profil mahasiswa yang sangat rentan. Dengan demikian, dashboard ini menjadi alat yang sangat kuat untuk memandu institusi dalam merancang strategi intervensi yang tidak hanya reaktif, tetapi juga proaktif dan tertarget pada segmen mahasiswa yang paling membutuhkan.
 
 
 ## Menjalankan Sistem Machine Learning
-Jelaskan cara menjalankan protoype sistem machine learning yang telah dibuat. Selain itu, sertakan juga link untuk mengakses prototype tersebut.
+Prototype sistem machine learning ini bertujuan untuk memprediksi status mahasiswa di Jaya Jaya Institut, apakah mereka akan dropout atau tidak, berdasarkan data individual mahasiswa.
 
+Langkah-langkah Menjalankan Prototype:
+
+1. Buka aplikasi prototype melalu [link berikut](https://duckduckgo.com).
+2. Isi seluruh field input sesuai data yang diinginkan, yang terbagi dalam beberapa bagian seperti yang terlihat pada screenshot Anda:
+3. Klik tombol “Prediksi”.
+
+Sistem akan menjalankan model machine learning yang telah dilatih sebelumnya. Hasil prediksi akan muncul di bagian bawah antarmuka, misalnya:
+```
+⚠️ Mahasiswa kemungkinan besar Dropout. Probabilitas: 60%"
 ```
 
 ```
+✅ Mahasiswa kemungkinan Bertahan / Lulus. Probabilitas: 78%
+```
 
-Tentu, saya akan sesuaikan kembali kesimpulan proyek Anda dengan menggunakan data hasil akhir dari model **Random Forest** yang Anda berikan.
 
----
 
 ### Conclusion
+---
 
 Proyek ini berhasil mengembangkan sistem deteksi dini risiko *dropout* mahasiswa untuk **Jaya Jaya Institut**, yang merupakan langkah krusial dalam mengatasi tingginya angka *dropout*. Dengan memanfaatkan data historis mahasiswa, kami telah membangun model *machine learning* prediktif yang andal dan menyajikan wawasan penting yang dapat ditindaklanjuti, yang dapat menjadi fondasi untuk *business dashboard* interaktif.
 
@@ -165,9 +218,10 @@ Evaluasi model *machine learning* menunjukkan bahwa algoritma **Random Forest** 
     ```
 Hasil ini menunjukkan bahwa model memiliki kemampuan yang sangat baik dalam mengidentifikasi mahasiswa yang berpotensi *dropout* (kelas 1), dengan **tingkat `recall` mencapai 92%**. Analisis *feature importance* dari model Random Forest mengonfirmasi bahwa faktor **kinerja akademik** (nilai dan jumlah unit kurikuler yang disetujui di semester 1 dan 2) adalah prediktor paling dominan. Temuan ini selaras dengan analisis data eksploratif, yang menunjukkan konsentrasi *dropout* tertinggi pada mahasiswa dengan performa akademik awal yang rendah. Faktor penting lainnya yang juga berpengaruh signifikan mencakup **usia saat pendaftaran**, **status pembayaran biaya kuliah**, **kepemilikan beasiswa**, dan **status utang (debtor)**.
 
----
+
 
 ### Rekomendasi Action Items
+---
 
 Berdasarkan hasil analisis dan model prediksi yang telah dikembangkan, berikut adalah rekomendasi tindakan strategis yang dapat diimplementasikan oleh institusi guna menekan angka putus studi (dropout) dan meningkatkan tingkat retensi mahasiswa.
 
